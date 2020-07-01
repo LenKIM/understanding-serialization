@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 public class Contents implements Serializable {
 
+
     LocalDateTime dateTime;
     String contents;
 

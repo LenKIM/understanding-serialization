@@ -5,6 +5,8 @@
 
 package c1;
 
+import jdk.nashorn.internal.parser.JSONParser;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -41,5 +43,19 @@ public class Main {
             }
         }
 
+
+        Msg aa = Msg.newBuilder()
+                .setFoo("AA")
+                .setBlah(SecondMsg.newBuilder().setBlah(20).build())
+                .build();
+
+
+        byte[] bytes = aa.toByteArray();
+
+        Msg msg = Msg.parseFrom(bytes);
+
+        msg.getBlah();
     }
+
+
 }
