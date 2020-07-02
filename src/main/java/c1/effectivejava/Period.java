@@ -31,28 +31,28 @@ public final class Period implements Serializable {
     public String toString() { return start + " - " + end; }
 
 
-    // 코드 90-1 Period 클래스용 직렬화 프록시 (479쪽)
-    private static class SerializationProxy implements Serializable {
-        private final Date start;
-        private final Date end;
-
-        SerializationProxy(Period p) {
-            this.start = p.start;
-            this.end = p.end;
-        }
-
-        private static final long serialVersionUID =
-                234098243823485285L; // 아무 값이나 상관없다. (아이템 87)
-    }
-
-    // 직렬화 프록시 패턴용 writeReplace 메서드 (480쪽)
-    private Object writeReplace() {
-        return new SerializationProxy(this);
-    }
-
-    // 직렬화 프록시 패턴용 readObject 메서드 (480쪽)
-    private void readObject(ObjectInputStream stream)
-            throws InvalidObjectException {
-        throw new InvalidObjectException("프록시가 필요합니다.");
-    }
+//    // 코드 90-1 Period 클래스용 직렬화 프록시 (479쪽)
+//    private static class SerializationProxy implements Serializable {
+//        private final Date start;
+//        private final Date end;
+//
+//        SerializationProxy(Period p) {
+//            this.start = p.start;
+//            this.end = p.end;
+//        }
+//
+//        private static final long serialVersionUID =
+//                234098243823485285L; // 아무 값이나 상관없다. (아이템 87)
+//    }
+//
+//    // 직렬화 프록시 패턴용 writeReplace 메서드 (480쪽)
+//    private Object writeReplace() {
+//        return new SerializationProxy(this);
+//    }
+//
+//    // 직렬화 프록시 패턴용 readObject 메서드 (480쪽)
+//    private void readObject(ObjectInputStream stream)
+//            throws InvalidObjectException {
+//        throw new InvalidObjectException("프록시가 필요합니다.");
+//    }
 }

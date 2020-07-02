@@ -9,15 +9,22 @@ import java.io.Serializable;
 
 public class Post implements Serializable {
 
+    int id;
+    String name;
     Contents contents;
 
-    public Post(String name, Contents contents) {
+    public Post(int id, String name, Contents contents) {
+        this.id = id;
+        this.name = name;
         this.contents = contents;
     }
+
 
     @Override
     public String toString() {
         return "Post{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", contents=" + contents +
                 '}';
     }

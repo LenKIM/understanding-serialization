@@ -8,6 +8,7 @@ package c1;
 import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.*;
+import java.rmi.server.RMIClassLoader;
 import java.time.LocalDateTime;
 import java.util.Base64;
 
@@ -15,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Post post = new Post("Len", new Contents(LocalDateTime.now(), "내용"));
+        Post post = new Post(1, "Len", new Contents(LocalDateTime.now(), "내용"));
 
         byte[] serializationPost;
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -29,12 +30,11 @@ public class Main {
 
         String x = Base64.getEncoder().encodeToString(serializationPost);
         System.out.println(x);
-// rO0ABXNyAAdjMS5Qb3N0Vg1eItIkVN4CAAJMAAhjb250ZW50c3QADUxjMS9Db250ZW50cztMAARuYW1ldAASTGphdmEvbGFuZy9TdHJpbmc7eHBzcgALYzEuQ29udGVudHNvXOGIyc9XLgIAAkwACGNvbnRlbnRzcQB
+// rO0ABXNyAAdjMS5Qb3N0Vg1eItIkVN4CAAJMAAhjb250ZW50c3QADUxjMS9Db250ZW50cztMAARuYW1ldAASTGphdmEvbGFuZy9TdHJpbmc7eHBzcgALYzEuQ29udGVudHNvXOGIyc9XLgIAAkwACGNvbnRlbnRzcQB+AAJMAAhkYXRlVGltZXQAGUxqYXZhL3RpbWUvTG9jYWxEYXRlVGltZTt4cHQABuuCtOyaqXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcOBQAAB+QHAwESFhDO+oB4dAADTGVu
 //        https://docs.oracle.com/javase/6/docs/platform/serialization/spec/class.html#4100
         //직렬화된 데이터를 역직렬화
         String base64Post = x;
-
-        byte[] serializedPost = Base64.getDecoder().decode(base64Post);
+        byte[] serializedPost = Base64.getDecoder().decode("rO0ABXNyAAdjMS5Qb3N0Vg1eItIkVN4CAAJMAAhjb250ZW50c3QADUxjMS9Db250ZW50cztMAARuYW1ldAASTGphdmEvbGFuZy9TdHJpbmc7eHBzcgALYzEuQ29udGVudHNvXOGIyc9XLgIAAkwACGNvbnRlbnRzcQB+AAJMAAhkYXRlVGltZXQAGUxqYXZhL3RpbWUvTG9jYWxEYXRlVGltZTt4cHQABuuCtOyaqXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcOBQAAB+QHAwESFhDO+oB4dAADTGVu");
         try (ByteArrayInputStream bais = new ByteArrayInputStream(serializedPost)) {
             try (ObjectInputStream ois = new ObjectInputStream(bais)) {
                 Object objectPost = ois.readObject();
