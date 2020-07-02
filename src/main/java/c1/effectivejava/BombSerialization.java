@@ -3,13 +3,13 @@
  * Github : http://github.com/lenkim
  */
 
-package c1;
+package c1.effectivejava;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static c1.Util.deserialize;
-import static c1.Util.serialize;
+import static c1.effectivejava.Util.deserialize;
+import static c1.effectivejava.Util.serialize;
 
 public class BombSerialization {
     static byte[] bomb() {

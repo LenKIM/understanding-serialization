@@ -176,6 +176,15 @@ Java(TM) Object Serialization Specification
 
 
 
+```java
+Exception in thread "main" java.io.NotSerializableException: c1.Post
+	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1184)
+	at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
+	at c1.Main.main(Main.java:23)
+```
+
+
+
 ## 05. 자바 직렬화를 언제, 어디서 사용되나?
 
 
@@ -184,9 +193,14 @@ Java(TM) Object Serialization Specification
 
 
 
-- 서블릿 세션(Servelt Session)
-- 캐시(Cache)
-- 자바 RMI(Remote Method Invocation)
+- 서블릿 세션(Servelt Session)  
+  세션을 서블릿 메모리 위에서 운용한다면 직렬화를 필요로 하지 않지만, 파일로 저장하거나 세션 클러스터링, DB를 저장하는 옵션 등을 선택하게 되면 세션 자체가 직렬화가 되어 저장되어 전달됩니다.
+
+- 캐시(Cache)  
+  Ehcache, Redis, Memcached 라이브러리 시스템을 많이 사용됩니다. 사실 사용하지 않아도 동작된다.
+
+- 자바 RMI(Remote Method Invocation)  
+  원격 시스템 간의 메시지 교환을 위해서 사용하는 자바에서 지원하는 기술.
 
 
 
@@ -199,8 +213,6 @@ https://j.mearie.org/post/122845365013/serialization
 ## 06. 그러나 직렬화는 사용하지 말아야 합니다.
 
 
-
-그래서 선택할 수 있는 대안이 avro, protobuf
 
 1. UID
 2. 버그와 보안 구멍이 생길 위험이 높아진다는 점
@@ -215,25 +227,31 @@ https://j.mearie.org/post/122845365013/serialization
 
 
 
-## 07. 크로스-플랫폼 구조화된 데이터 표현(avro/protobuf)을 사용합시다.
-
 결론은
 
+자바 직렬화는 회피해야 합니다.
 
-
-자바 직렬화는 별로다.
-
-
+이펙티브 자바 책에서는 자바 직렬화를 대체할 수 있다면, 시간과 비용을 들여 변경하라고 요구하고 있습니다.
 
 
 
-Exception in thread "main" java.io.NotSerializableException: c1.Post
+## 07. 크로스-플랫폼 구조화된 데이터 표현(avro/protobuf)을 사용합시다.
 
-​	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1184)
 
-​	at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
 
-​	at c1.Main.main(Main.java:23)
+그래서 선택할 수 있는 대안이 `avro`,`protobuf` 을 사용하라고 권장합니다.
+
+
+
+**크로스-플랫폼 구조화된 데이터 표현?**
+
+
+
+Key, Value 로 이루어져 있는 것.
+
+
+
+즉, 자바 직렬화보다 안전하다고 할 수 있는데, 어째서? 안전하다고 할 수 있는가?
 
 
 
@@ -249,11 +267,6 @@ Base64가 무엇인가?
 
 만약 시리얼 라이즈를 맞추지 않았을 경우.
 
-Exception in thread "main" java.io.InvalidClassException: c1.Post; local class incompatible: stream classdesc serialVersionUID = 6200715765606536414, local class serialVersionUID = -6165664529577570928
-
-
-
-
 ```
-
+Exception in thread "main" java.io.InvalidClassException: c1.Post; local class incompatible: stream classdesc serialVersionUID = 6200715765606536414, local class serialVersionUID = -6165664529577570928
 ```

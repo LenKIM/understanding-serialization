@@ -1,4 +1,4 @@
-package c1;
+package c1.effectivejava;
 import java.io.*;
 
 // 코드 87-3 합리적인 커스텀 직렬화 형태를 갖춘 StringList (462-463쪽)

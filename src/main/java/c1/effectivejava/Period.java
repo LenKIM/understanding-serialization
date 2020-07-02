@@ -1,4 +1,4 @@
-package c1;
+package c1.effectivejava;
 
 // 직렬화 프록시를 사용한 Period 클래스 (479-480쪽)
 

@@ -1,4 +1,4 @@
-package c1.enumsingleton;
+package c1.effectivejava.enumsingleton;
 
 import java.util.*;
 

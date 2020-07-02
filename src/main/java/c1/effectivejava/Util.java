@@ -1,4 +1,4 @@
-package c1;
+package c1.effectivejava;
 
 import java.io.*;
 
